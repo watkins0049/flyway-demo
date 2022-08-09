@@ -19,9 +19,10 @@ automatically downloaded. If not, run `./gradlew clean build`.
 ## How it Works
 On application launch, Flyway will connect to the database and run any SQL script in the `resources/db/migration`
 directory. The Flyway migration scripts should be named `VX.Y__descriptive_name_here` where `X.Y` is a numerical
-version. Flyway will create a table on first runtime (`flyway_schema_history` by default, override with the property
-`sping.flyway.table`) that will track the versions already migrated and will skip migrations already successfully
-deployed.
+version (note: this can be overridden with `spring.flyway.sql-migration-prefix` and
+`spring.flyway.sql-migration-separator`). Flyway will create a table on first runtime (`flyway_schema_history` by
+default, override with the property `sping.flyway.table`) that will track the versions already migrated and will skip
+migrations already successfully deployed.
 
 A list of Flyway properties can be found on [the Spring Website](https://docs.spring.io/spring-boot/docs/current/reference/html/application-properties.html#appendix.application-properties.data-migration)
 
