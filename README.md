@@ -1,6 +1,6 @@
 # Flyway Demo
 This application is a high-level overview of Flyway and how it can be used in a Spring Boot application to refactor
-(known as a migration to Flyway).
+(aka migrate) a database.
 
 ## Requirements
 - Java 17
@@ -15,6 +15,8 @@ automatically downloaded. If not, run `./gradlew clean build`.
 3. Start up your Postgres server
     1. Mac users can download the [Postgres.app](https://postgresapp.com/)
     2. All other systems can [follow this guide](https://www.postgresql.org/download/)
+4. Launch the Spring Boot application
+   1. Note: you may need to adjust the datasource URL in `application.yml`
 
 ## How it Works
 On application launch, Flyway will connect to the database and run any SQL script in the `resources/db/migration`
