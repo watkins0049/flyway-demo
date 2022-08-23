@@ -6,3 +6,9 @@ spring:
     url: jdbc:postgresql://localhost:5432/postgres
     datasource: postgres
     # password: <no password for this demo>
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true

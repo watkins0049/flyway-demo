@@ -6,6 +6,7 @@ import com.lunch.and.learn.flyway.trainer.infrastructure.PokemonRepository;
 import com.lunch.and.learn.flyway.trainer.infrastructure.TrainerRepository;
 import com.lunch.and.learn.flyway.trainer.infrastructure.entity.Pokemon;
 import com.lunch.and.learn.flyway.trainer.infrastructure.entity.Trainer;
+import com.lunch.and.learn.flyway.trainer.infrastructure.entity.TrainerPokemon;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,28 +18,28 @@ import java.util.stream.Collectors;
 public class TrainerService {
 
     private final TrainerRepository trainerRepository;
-    private final PokemonRepository pokemonRepository;
 
     public List<TrainerResponse> getTrainers() {
         List<Trainer> allTrainers = trainerRepository.findAll();
-        List<Pokemon> allPokemon = pokemonRepository.findAll();
 
         return allTrainers.stream()
                 .map(t -> TrainerResponse.builder()
                         .id(t.getId())
                         .name(t.getName())
-                        .pokemon(getTrainerPokemon(allPokemon, t.getId()))
+                        .pokemon(mapPokemon(t.getTrainerPokemon()))
                         .build())
                 .collect(Collectors.toList());
     }
 
-    private List<PokemonResponse> getTrainerPokemon(List<Pokemon> allPokemon, Integer trainerId) {
-        return allPokemon.stream().filter(p -> p.isAssignedToTrainer(trainerId))
-                .map(p -> PokemonResponse.builder()
-                        .name(p.getName())
-                        .type(p.getType())
-                        .pokedexNumber(p.getPokedexNumber())
-                        .build())
-                .collect(Collectors.toList());
+    private List<PokemonResponse> mapPokemon(List<TrainerPokemon> trainerPokemon) {
+        return trainerPokemon.stream().map(tp -> {
+            Pokemon p = tp.getPokemon();
+                    return PokemonResponse.builder()
+                            .pokedexNumber(p.getPokedexNumber())
+                            .type(p.getType())
+                            .name(p.getName())
+                            .build();
+                }
+        ).collect(Collectors.toList());
     }
 }

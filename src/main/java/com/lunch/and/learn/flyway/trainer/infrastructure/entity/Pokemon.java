@@ -4,7 +4,6 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.util.Arrays;
 
 @Data
 @Entity
@@ -19,9 +18,4 @@ public class Pokemon {
     private Integer specialAttack;
     private Integer specialDefense;
     private Integer speed;
-    private String trainers;
-
-    public Boolean isAssignedToTrainer(Integer trainerId) {
-        return trainers != null && Arrays.asList(trainers.split(",")).contains(trainerId.toString());
-    }
 }
