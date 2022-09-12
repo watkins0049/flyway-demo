@@ -30,5 +30,5 @@ A list of Flyway properties can be found on [the Spring Website](https://docs.sp
 
 
 ## Demo Branches
-- `master` - Contains the denormalized database structure
+- `main` - Contains the denormalized database structure
 - `flyway-normalization` - Contains the database migration to further normalize the database
